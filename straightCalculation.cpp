@@ -1,5 +1,7 @@
 #include "straightCalculation.h"
 
+extern std::atomic<bool> stopRequested;
+
 void straightCalculation(Result& calculationResult, unsigned long long minNumber, unsigned long long maxNumber, unsigned long long threshold)
 {
     //Result calculationResult;
@@ -9,7 +11,7 @@ void straightCalculation(Result& calculationResult, unsigned long long minNumber
     {
         unsigned long long currentNextNumber = currentNumber;
         unsigned long long currentChainLength = 1;
-        while (currentNextNumber != 1)
+        while (currentNextNumber != 1 and !stopRequested)
         {
             //currentNextNumber = getNextNumber(currentNextNumber).result;
 

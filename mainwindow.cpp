@@ -175,12 +175,25 @@ void MainWindow::calcFunction()
 
             if(!finalIsOverflow)
             {
-                ui->outputField->setPlainText("Maximum number: " + QString::number(maxNumber) + "\n" +
-                                              "Number of threads: " + QString::number(numOfThreads) + "\n" +
-                                              methodReport + "\n" +
-                                              "The number having the longest Collatz chain: " + QString::number(finalNumber) + "\n" +
-                                              "The length of the Collatz chain: " + QString::number(finalChainLength) + "\n" +
-                                              "Execution time: " + QString::number(double(duration.count() / 1000)) + " ms" );
+                if (!stopRequested)
+                {
+                    ui->outputField->setPlainText("Maximum number: " + QString::number(maxNumber) + "\n" +
+                                                  "Number of threads: " + QString::number(numOfThreads) + "\n" +
+                                                  methodReport + "\n" +
+                                                  "The number having the longest Collatz chain: " + QString::number(finalNumber) + "\n" +
+                                                  "The length of the Collatz chain: " + QString::number(finalChainLength) + "\n" +
+                                                  "Execution time: " + QString::number(double(duration.count() / 1000)) + " ms" );
+                }
+                else
+                {
+                    ui->outputField->setPlainText("Calculation was aborted.\nPress 'Start' to run the calculation.");
+                }
+                // ui->outputField->setPlainText("Maximum number: " + QString::number(maxNumber) + "\n" +
+                //                               "Number of threads: " + QString::number(numOfThreads) + "\n" +
+                //                               methodReport + "\n" +
+                //                               "The number having the longest Collatz chain: " + QString::number(finalNumber) + "\n" +
+                //                               "The length of the Collatz chain: " + QString::number(finalChainLength) + "\n" +
+                //                               "Execution time: " + QString::number(double(duration.count() / 1000)) + " ms" );
             }
             else
             {
@@ -204,5 +217,6 @@ void MainWindow::stopFunction()
 {
     ui->stopButton->setEnabled(false);
     ui->startButton->setEnabled(true);
-    ui->outputField->setPlainText("Calculation was aborted.\nPress 'Start' to run the calculation.");
+    stopRequested = true;
+    //ui->outputField->setPlainText("Calculation was aborted.\nPress 'Start' to run the calculation.");
 }
