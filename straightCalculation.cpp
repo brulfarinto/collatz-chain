@@ -63,7 +63,7 @@ void atomicCalculation(std::atomic<std::size_t>*& values, Result& calculationRes
         unsigned long long currentNextNumber = currentNumber;
         unsigned long long currentChainLength = 1;
 
-        while (currentNextNumber != 1)
+        while (currentNextNumber != 1 and !stopRequested)
         {
             //currentNextNumber = getNextNumber(currentNextNumber).result;
 
